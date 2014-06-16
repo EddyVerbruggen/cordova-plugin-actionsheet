@@ -1,6 +1,6 @@
 #import <Cordova/CDVPlugin.h>
 
-@interface ActionSheet :CDVPlugin
+@interface ActionSheet :CDVPlugin<UIActionSheetDelegate>
 
 - (void) show:(CDVInvokedUrlCommand*)command;
 
