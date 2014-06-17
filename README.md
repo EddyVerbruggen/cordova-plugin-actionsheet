@@ -79,6 +79,8 @@ It's probably easiest to show how the ActionSheets of the screenshots above have
         'addCancelButtonWithLabel': 'Cancel',
         'addDestructiveButtonWithLabel' : 'Delete it'
     };
+    // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+    // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
     window.plugins.actionsheet.show(options, callback);
   };
 
