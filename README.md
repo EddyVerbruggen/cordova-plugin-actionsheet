@@ -62,6 +62,17 @@ ActionSheet.js is brought in automatically. There is no need to change or add an
 
 iOS: Copy the `.h` and `.m` files to `platforms/ios/<ProjectName>/Plugins`
 
+### PhoneGap Build
+ActionSHeet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
+```xml
+<gap:plugin name="nl.x-services.plugins.actionsheet" />
+```
+
+ActionSheet.js is brought in automatically. Make sure though you include a reference to cordova.js in your index.html's head:
+```html
+<script type="text/javascript" src="cordova.js"></script>
+```
+
 ## 4. Usage
 It's probably easiest to show how the ActionSheets of the screenshots above have been created.
 ```js
