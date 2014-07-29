@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="nl.xservices.plugins.actionsheet" version="0.0.2">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="nl.x-services.plugins.actionsheet" version="0.0.2">
 	<name>ActionSheet</name>
 	<description>
     Show a sheet of options the user can choose from.
