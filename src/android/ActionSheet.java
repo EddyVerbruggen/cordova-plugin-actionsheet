@@ -17,6 +17,8 @@ import android.text.TextUtils;
  * WSB-2481
  * 
  * https://github.com/bpappin/cordova-plugin-actionsheet
+ * 
+ * @author Brill Pappin
  */
 public class ActionSheet extends CordovaPlugin {
 
@@ -32,25 +34,31 @@ public class ActionSheet extends CordovaPlugin {
 
 			String title = options.optString("title");
 			JSONArray buttons = options.optJSONArray("buttonLabels");
+
+			boolean androidEnableCancelButton = options.optBoolean(
+					"androidEnableCancelButton", false);
+
 			String addCancelButtonWithLabel = options
 					.optString("addCancelButtonWithLabel");
 			String addDestructiveButtonWithLabel = options
 					.optString("addDestructiveButtonWithLabel");
 
 			this.show(title, buttons, addCancelButtonWithLabel,
-					addDestructiveButtonWithLabel, callbackContext);
-			// return true;
-		} else {
-			return false;
+					androidEnableCancelButton, addDestructiveButtonWithLabel,
+					callbackContext);
+			// need to return as this call is async.
+			return true;
 		}
+		return false;
 
-		callbackContext.success();
-		return true;
+		// callbackContext.success();
+		// return true;
 	}
 
 	public synchronized void show(final String title,
 			final JSONArray buttonLabels,
 			final String addCancelButtonWithLabel,
+			final boolean androidEnableCancelButton,
 			final String addDestructiveButtonWithLabel,
 			final CallbackContext callbackContext) {
 
@@ -58,22 +66,31 @@ public class ActionSheet extends CordovaPlugin {
 
 		Runnable runnable = new Runnable() {
 			public void run() {
+
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						cordova.getActivity());
 				builder.setTitle(title);
 
 				builder.setCancelable(true);
 
-				if (!TextUtils.isEmpty(addCancelButtonWithLabel)) {
+				// XXX Although there is not really anything technically wrong
+				// with adding a cancel button, Android typically doesn't use
+				// one for this kind of list dialog.
+				// We'll allow the user to override the "smart" option and
+				// include it if they insist anyway.
+
+				if (androidEnableCancelButton
+						&& !TextUtils.isEmpty(addCancelButtonWithLabel)) {
 					builder.setNegativeButton(addCancelButtonWithLabel,
 							new OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									dialog.dismiss();
-									callbackContext
-											.sendPluginResult(new PluginResult(
-													PluginResult.Status.OK, 0));
+									dialog.cancel();
+									// dialog.dismiss();
+									// callbackContext
+									// .sendPluginResult(new PluginResult(
+									// PluginResult.Status.OK, 0));
 								}
 							});
 				}
@@ -102,7 +119,7 @@ public class ActionSheet extends CordovaPlugin {
 				builder.setItems(buttons, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
+						// dialog.dismiss();
 						// java 0 based index converted to cordova 1 based
 						// index, so we don't confuse the webbies.
 						callbackContext.sendPluginResult(new PluginResult(
@@ -112,25 +129,31 @@ public class ActionSheet extends CordovaPlugin {
 
 				builder.setOnCancelListener(new AlertDialog.OnCancelListener() {
 					public void onCancel(DialogInterface dialog) {
-						dialog.dismiss();
+						// dialog.cancel();
+						// dialog.dismiss();
 						callbackContext.sendPluginResult(new PluginResult(
 								PluginResult.Status.OK, 0));
 					}
 				});
 
-				builder.create().show();
+				AlertDialog dialog = builder.create();
+				dialog.show();
 			};
 		};
 		this.cordova.getActivity().runOnUiThread(runnable);
 	}
 
-	private String[] getStringArray(JSONArray jsonArray) {
+	private String[] getStringArray(JSONArray jsonArray, String... additional) {
 		String[] stringArray = null;
-		int length = jsonArray.length();
+		int jasonlen = jsonArray.length();
+		int length = jasonlen + additional.length;
 		if (jsonArray != null) {
 			stringArray = new String[length];
-			for (int i = 0; i < length; i++) {
+			for (int i = 0; i < jasonlen; i++) {
 				stringArray[i] = jsonArray.optString(i);
+			}
+			for (int i = jasonlen; i < additional.length; i++) {
+				stringArray[i] = additional[i];
 			}
 		}
 		return stringArray;
