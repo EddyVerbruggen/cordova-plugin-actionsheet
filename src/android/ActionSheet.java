@@ -115,24 +115,33 @@ public class ActionSheet extends CordovaPlugin {
 				// });
 				// }
 
-				String[] buttons = getStringArray(buttonLabels);
+				final String[] buttons = getStringArray(buttonLabels);
 				builder.setItems(buttons, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// dialog.dismiss();
 						// java 0 based index converted to cordova 1 based
 						// index, so we don't confuse the webbies.
-						callbackContext.sendPluginResult(new PluginResult(
-								PluginResult.Status.OK, which + 1));
+						callbackContext
+								.sendPluginResult(new PluginResult(
+										PluginResult.Status.OK,
+										which
+												+ (addDestructiveButtonWithLabel == null ? 0
+														: 1) + 1));
 					}
 				});
 
 				builder.setOnCancelListener(new AlertDialog.OnCancelListener() {
 					public void onCancel(DialogInterface dialog) {
-						// dialog.cancel();
-						// dialog.dismiss();
+						// XXX Match the way the iOS plugin works. Cancel is
+						// always the last index and destructive is always the
+						// first, if it exists. Even though we don't handle the
+						// destructive button, we want the selected index to
+						// match.
+						int cancelButtonIndex = buttons.length
+								+ (addDestructiveButtonWithLabel == null ? 0
+										: 1);
 						callbackContext.sendPluginResult(new PluginResult(
-								PluginResult.Status.OK, 0));
+								PluginResult.Status.OK, cancelButtonIndex));
 					}
 				});
 
