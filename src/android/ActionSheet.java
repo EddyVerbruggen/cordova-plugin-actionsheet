@@ -1,5 +1,8 @@
 package nl.xservices.plugins.actionsheet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -87,10 +90,8 @@ public class ActionSheet extends CordovaPlugin {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									dialog.cancel();
-									// dialog.dismiss();
-									// callbackContext
-									// .sendPluginResult(new PluginResult(
-									// PluginResult.Status.OK, 0));
+									// XXX We catch the cancel event and return
+									// the index then.
 								}
 							});
 				}
@@ -115,18 +116,18 @@ public class ActionSheet extends CordovaPlugin {
 				// });
 				// }
 
-				final String[] buttons = getStringArray(buttonLabels);
+				final String[] buttons = getStringArray(
+						buttonLabels,
+						(TextUtils.isEmpty(addDestructiveButtonWithLabel) ? null
+								: addDestructiveButtonWithLabel));
+
 				builder.setItems(buttons, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// java 0 based index converted to cordova 1 based
 						// index, so we don't confuse the webbies.
-						callbackContext
-								.sendPluginResult(new PluginResult(
-										PluginResult.Status.OK,
-										which
-												+ (addDestructiveButtonWithLabel == null ? 0
-														: 1) + 1));
+						callbackContext.sendPluginResult(new PluginResult(
+								PluginResult.Status.OK, which + 1));
 					}
 				});
 
@@ -137,9 +138,7 @@ public class ActionSheet extends CordovaPlugin {
 						// first, if it exists. Even though we don't handle the
 						// destructive button, we want the selected index to
 						// match.
-						int cancelButtonIndex = buttons.length
-								+ (addDestructiveButtonWithLabel == null ? 0
-										: 1);
+						int cancelButtonIndex = buttons.length + 1;
 						callbackContext.sendPluginResult(new PluginResult(
 								PluginResult.Status.OK, cancelButtonIndex));
 					}
@@ -152,20 +151,25 @@ public class ActionSheet extends CordovaPlugin {
 		this.cordova.getActivity().runOnUiThread(runnable);
 	}
 
-	private String[] getStringArray(JSONArray jsonArray, String... additional) {
-		String[] stringArray = null;
-		int jasonlen = jsonArray.length();
-		int length = jasonlen + additional.length;
-		if (jsonArray != null) {
-			stringArray = new String[length];
-			for (int i = 0; i < jasonlen; i++) {
-				stringArray[i] = jsonArray.optString(i);
-			}
-			for (int i = jasonlen; i < additional.length; i++) {
-				stringArray[i] = additional[i];
+	private String[] getStringArray(JSONArray jsonArray, String... prepend) {
+
+		List<String> btn = new ArrayList<String>();
+
+		// Add prefix items like destructive buttons.
+		for (int i = 0; i < prepend.length; i++) {
+			if (!TextUtils.isEmpty(prepend[i])) {
+				btn.add(prepend[i]);
 			}
 		}
-		return stringArray;
+
+		// add the rest of the buttons from the list.
+		if (jsonArray != null) {
+			for (int i = 0; i < jsonArray.length(); i++) {
+				btn.add(jsonArray.optString(i));
+			}
+
+		}
+		return btn.toArray(new String[btn.size()]);
 	}
 
 }
