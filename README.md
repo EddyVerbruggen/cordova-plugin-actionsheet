@@ -1,4 +1,4 @@
-# ActionSheet - a Cordova plugin
+# ActionSheet Cordova / PhoneGap Plugin
 by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 
 ## 0. Index
@@ -9,7 +9,8 @@ by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 	3. [Automatically (CLI / Plugman)](#automatically-cli--plugman)
 	3. [Manually](#manually)
 4. [Usage](#4-usage)
-5. [License](#6-license)
+5. [Credits](#5-credits)
+6. [License](#6-license)
 
 ## 1. Description
 
@@ -20,13 +21,18 @@ Show a sheet of options the user can choose from.
 
 ## 2. Screenshots
 
-![ScreenShot](screenshots/ios-share.png)
+iOS
+
+<img src="screenshots/ios-share.png" width="235"/>&nbsp;
+<img src="screenshots/ios-delete.png" width="235"/>&nbsp;
+<img src="screenshots/ios-logout.png" width="235"/>
 
 
-![ScreenShot](screenshots/ios-delete.png)
+Android
 
-
-![ScreenShot](screenshots/ios-logout.png)
+<img src="screenshots/android-share.png" width="235"/>&nbsp;
+<img src="screenshots/android-delete.png" width="235"/>&nbsp;
+<img src="screenshots/android-logout.png" width="235"/>
 
 ## 3. Installation
 
@@ -74,7 +80,9 @@ ActionSheet.js is brought in automatically. Make sure though you include a refer
 ```
 
 ## 4. Usage
-It's probably easiest to show how the ActionSheets of the screenshots above have been created.
+Check the [demo code](demo) to get you going quickly,
+or copy-paste some of the code below to replicate the ActionSheets of the screenshots above.
+
 ```js
   var callback = function(buttonIndex) {
     setTimeout(function() {
@@ -87,6 +95,7 @@ It's probably easiest to show how the ActionSheets of the screenshots above have
     var options = {
         'title': 'What do you want with this image?',
         'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+        'androidEnableCancelButton' : true,
         'addCancelButtonWithLabel': 'Cancel',
         'addDestructiveButtonWithLabel' : 'Delete it'
     };
@@ -106,13 +115,20 @@ It's probably easiest to show how the ActionSheets of the screenshots above have
   function testLogoutSheet() {
     var options = {
         'buttonLabels': ['Log out'],
+        'androidEnableCancelButton' : true,
         'addCancelButtonWithLabel': 'Cancel'
     };
     window.plugins.actionsheet.show(options, callback);
   };
 ```
 
-## 5. License
+## 5. Credits
+iOS code: [Eddy Verbruggen](https://github.com/EddyVerbruggen)
+
+Android code: [Bill Papping](https://github.com/bpappin)
+
+
+## 6. License
 
 [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)
 
