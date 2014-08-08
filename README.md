@@ -76,7 +76,8 @@ Android
 3\. Download the source files and copy them to your project.
 
 iOS: Copy the `.h` and `.m` files to `platforms/ios/<ProjectName>/Plugins`
-Android: Copy src/android/ActionSheet.java to src/nl/xservices/plugins/actionsheet/
+
+Android: Copy `ActionSheet.java` to `src/nl/xservices/plugins/actionsheet/`
 
 ### PhoneGap Build
 ActionSheet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
