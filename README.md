@@ -136,7 +136,7 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
 ## 5. Credits
 iOS code: [Eddy Verbruggen](https://github.com/EddyVerbruggen)
 
-Android code: [Bill Papping](https://github.com/bpappin)
+Android code: [Brill Papping](https://github.com/bpappin)
 
 
 ## 6. License
