@@ -17,7 +17,7 @@ by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 Show a sheet of options the user can choose from.
 
 * Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman).
-* For iOS only currently, using the UIActionSheet class in the native code.
+* For iOS (native UIActionSheet) and Android (native AlertDialog).
 
 ## 2. Screenshots
 
@@ -52,10 +52,19 @@ ActionSheet.js is brought in automatically. There is no need to change or add an
 
 ### Manually
 
-1\. Add the following xml to your `config.xml` in the root directory of your `www` folder:
+1\. Add the following xml to your `config.xml` files:
+
+iOS
 ```xml
 <feature name="ActionSheet">
   <param name="ios-package" value="ActionSheet" />
+</feature>
+```
+
+Android
+```xml
+<feature name="ActionSheet">
+  <param name="android-package" value="nl.xservices.plugins.actionsheet.ActionSheet"/>
 </feature>
 ```
 
@@ -67,9 +76,10 @@ ActionSheet.js is brought in automatically. There is no need to change or add an
 3\. Download the source files and copy them to your project.
 
 iOS: Copy the `.h` and `.m` files to `platforms/ios/<ProjectName>/Plugins`
+Android: Copy src/android/ActionSheet.java to src/nl/xservices/plugins/actionsheet/
 
 ### PhoneGap Build
-ActionSHeet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
+ActionSheet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
 ```xml
 <gap:plugin name="nl.x-services.plugins.actionsheet" />
 ```
