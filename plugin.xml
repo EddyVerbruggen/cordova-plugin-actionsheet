@@ -2,7 +2,7 @@
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="nl.x-services.plugins.actionsheet"
-    version="1.0.0">
+    version="1.1.0">
 
 	<name>ActionSheet</name>
 
@@ -40,4 +40,14 @@
 		</config-file>
 		<source-file src="src/android/ActionSheet.java" target-dir="src/nl/xservices/plugins/actionsheet"/>
 	</platform>
+
+  <!-- wp8 -->
+  <platform name="wp8">
+    <config-file target="config.xml" parent="/*">
+      <feature name="ActionSheet">
+        <param name="wp-package" value="ActionSheet"/>
+      </feature>
+    </config-file>
+    <source-file src="src/wp8/ActionSheet.cs" />
+  </platform>
 </plugin>

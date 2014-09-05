@@ -17,22 +17,28 @@ by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 Show a sheet of options the user can choose from.
 
 * Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman).
-* For iOS (native UIActionSheet) and Android (native AlertDialog).
+* iOS uses the native `UIActionSheet`.
+* Android uses the native `AlertDialog`.
+* WP8 uses the native `Popup`.
 
 ## 2. Screenshots
 
 iOS
 
-<img src="screenshots/ios-share.png" width="235"/>&nbsp;
-<img src="screenshots/ios-delete.png" width="235"/>&nbsp;
-<img src="screenshots/ios-logout.png" width="235"/>
+<img src="screenshots/ios/ios-share.png" width="235"/>&nbsp;
+<img src="screenshots/ios/ios-delete.png" width="235"/>&nbsp;
+<img src="screenshots/ios/ios-logout.png" width="235"/>
 
 
 Android
 
-<img src="screenshots/android-share.png" width="235"/>&nbsp;
-<img src="screenshots/android-delete.png" width="235"/>&nbsp;
-<img src="screenshots/android-logout.png" width="235"/>
+<img src="screenshots/android/android-share.png" width="235"/>&nbsp;
+<img src="screenshots/android/android-delete.png" width="235"/>&nbsp;
+<img src="screenshots/android/android-logout.png" width="235"/>
+
+WP8
+
+Screenshots will be added soon..
 
 ## 3. Installation
 
@@ -68,6 +74,13 @@ Android
 </feature>
 ```
 
+WP8
+```xml
+<feature name="ActionSheet">
+  <param name="wp-package" value="ActionSheet"/>
+</feature>
+```
+
 2\. Grab a copy of ActionSheet.js, add it to your project and reference it in `index.html`:
 ```html
 <script type="text/javascript" src="js/ActionSheet.js"></script>
@@ -77,7 +90,9 @@ Android
 
 iOS: Copy the `.h` and `.m` files to `platforms/ios/<ProjectName>/Plugins`
 
-Android: Copy `ActionSheet.java` to `src/nl/xservices/plugins/actionsheet/`
+Android: Copy `ActionSheet.java` to `platforms/android/src/nl/xservices/plugins/actionsheet/` (create the folders)
+
+WP8: Copy `ActionSheet.cs` to `platforms/wp8/Plugins/nl.x-services.plugins.actionsheet` (create the folders)
 
 ### PhoneGap Build
 ActionSheet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
@@ -134,7 +149,7 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
 ```
 
 ## 5. Credits
-iOS code: [Eddy Verbruggen](https://github.com/EddyVerbruggen)
+iOS and WP8 code: [Eddy Verbruggen](https://github.com/EddyVerbruggen)
 
 Android code: [Brill Papping](https://github.com/bpappin)
 
