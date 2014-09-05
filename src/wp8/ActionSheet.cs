@@ -1,4 +1,4 @@
-using Microsoft.Phone.Tasks;
+﻿﻿using Microsoft.Phone.Tasks;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
@@ -17,7 +17,7 @@ namespace Cordova.Extension.Commands
         [DataContract]
         public class ActionSheetOptions
         {
-            [DataMember(IsRequired = true, Name = "buttonLabels")]
+            [DataMember(IsRequired = false, Name = "buttonLabels")]
             public string[] buttonLabels { get; set; }
 
             [DataMember(IsRequired = false, Name = "title")]
@@ -28,11 +28,16 @@ namespace Cordova.Extension.Commands
 
             [DataMember(IsRequired = false, Name = "addDestructiveButtonWithLabel")]
             public string addDestructiveButtonWithLabel { get; set; }
+
+            [DataMember(IsRequired = false, Name = "winphoneEnableCancelButton")]
+            public bool winphoneEnableCancelButton { get; set; }
         }
 
         private ActionSheetOptions actionSheetOptions = null;
 
         private Popup popup = new Popup();
+
+        private Brush darkBrush = new SolidColorBrush(Color.FromArgb(250, 40, 40, 40));
 
         public void show(string options)
         {
@@ -48,95 +53,98 @@ namespace Cordova.Extension.Commands
             }
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                Border border = new Border();
+                border.Width = Application.Current.Host.Content.ActualWidth;
+                border.Background = darkBrush;
+                border.Padding = new Thickness(10, 10, 10, 10);
+
+
+                // container for the buttons
+                StackPanel panel = new StackPanel();
+                panel.HorizontalAlignment = HorizontalAlignment.Stretch;
+                panel.VerticalAlignment = VerticalAlignment.Center;
+                panel.Width = Application.Current.Host.Content.ActualWidth - 60;
+
+
+                // title
+                if (actionSheetOptions.title != null)
                 {
-                    Border border = new Border();
-                    border.Width = Application.Current.Host.Content.ActualWidth - 40;
-                    border.Background = new SolidColorBrush(Color.FromArgb(240, 40, 40, 40));
-                    border.CornerRadius = new CornerRadius(6);
-                    border.Padding = new Thickness(10, 10, 10, 10);
+                    TextBlock textblock1 = new TextBlock();
+                    textblock1.Text = actionSheetOptions.title;
+                    textblock1.TextWrapping = TextWrapping.Wrap;
+                    textblock1.Margin = new Thickness(20, 10, 20, 0); // left, top, right, bottom
+                    textblock1.FontSize = 22;
+                    textblock1.Foreground = new SolidColorBrush(Colors.White);
+                    panel.Children.Add(textblock1);
+                }
+
+                int buttonIndex = 1;
+
+                // desctructive button
+                if (actionSheetOptions.addDestructiveButtonWithLabel != null)
+                {
+                    Button button = new Button();
+                    button.TabIndex = buttonIndex++;
+                    button.Content = actionSheetOptions.addDestructiveButtonWithLabel;
+                    button.Background = darkBrush; // new SolidColorBrush(Colors.White);
+                    button.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 69, 0));
+                    button.Padding = new Thickness(10);
+                    button.Margin = new Thickness(5);
+                    button.Click += new RoutedEventHandler(buttonClickListener);
+                    panel.Children.Add(button);
+                }
 
 
-                    // container for the buttons
-                    StackPanel panel = new StackPanel();
-                    panel.HorizontalAlignment = HorizontalAlignment.Stretch;
-                    panel.VerticalAlignment = VerticalAlignment.Center;
-                    panel.Width = Application.Current.Host.Content.ActualWidth - 60;
-
-
-                    // title
-                    if (actionSheetOptions.title != null)
+                // regular buttons
+                if (actionSheetOptions.buttonLabels != null)
+                {
+                    foreach (String buttonLabel in actionSheetOptions.buttonLabels)
                     {
-                        TextBlock textblock1 = new TextBlock();
-                        textblock1.Text = actionSheetOptions.title;
-                        textblock1.Margin = new Thickness(20, 10, 20, 0); // left, top, right, bottom
-                        textblock1.FontSize = 22;
-                        textblock1.Foreground = new SolidColorBrush(Colors.White);
-                        panel.Children.Add(textblock1);
-                    }
-
-                    int buttonIndex = 1;
-
-                    // desctructive button
-                    if (actionSheetOptions.addDestructiveButtonWithLabel != null)
-                    {
-                        Button button = new Button();
-                        button.TabIndex = buttonIndex++;
-                        button.Content = actionSheetOptions.addDestructiveButtonWithLabel;
-                        button.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        button.Background = new SolidColorBrush(Colors.White);
-                        button.Foreground = new SolidColorBrush(Colors.Red);
-                        button.Padding = new Thickness(10);
-                        button.Margin = new Thickness(5);
-                        button.Click += new RoutedEventHandler(buttonClickListener);
-                        panel.Children.Add(button);
-
-                    }
-
-
-                    // regular buttons
-                    foreach (String buttonLabel in actionSheetOptions.buttonLabels) {
                         Button button = new Button();
                         button.TabIndex = buttonIndex++;
                         button.Content = buttonLabel;
-                        button.HorizontalContentAlignment = HorizontalAlignment.Left;
-                        button.Background = new SolidColorBrush(Colors.White);
-                        button.Foreground = new SolidColorBrush(Colors.Black);
+                        button.Background = darkBrush;
+                        button.Foreground = new SolidColorBrush(Colors.White);
                         button.Padding = new Thickness(10);
                         button.Margin = new Thickness(5);
                         button.Click += new RoutedEventHandler(buttonClickListener);
                         panel.Children.Add(button);
                     }
+                }
 
-                    // cancel button
-                    if (actionSheetOptions.addCancelButtonWithLabel != null)
-                    {
-                        Button button = new Button();
-                        button.TabIndex = buttonIndex++;
-                        button.Content = actionSheetOptions.addCancelButtonWithLabel;
-                        button.Margin = new Thickness(60, 0, 60, 5);
-                        button.FontSize = 18;
-                        button.Background = new SolidColorBrush(Colors.LightGray);
-                        button.Foreground = new SolidColorBrush(Colors.Black);
+                // cancel button
+                if (actionSheetOptions.winphoneEnableCancelButton && actionSheetOptions.addCancelButtonWithLabel != null)
+                {
+                    Button button = new Button();
+                    button.HorizontalAlignment = HorizontalAlignment.Left;
+                    button.TabIndex = buttonIndex++;
+                    button.Content = actionSheetOptions.addCancelButtonWithLabel;
+                    button.Padding = new Thickness(50, 10, 50, 10);
+                    button.Margin = new Thickness(5, 0, 20, 5);
+                    button.FontSize = 17;
+                    button.Background = darkBrush;
+                    button.Foreground = new SolidColorBrush(Colors.White);
 
-                        button.Click += new RoutedEventHandler(buttonClickListener);
-                        panel.Children.Add(button);
+                    button.Click += new RoutedEventHandler(buttonClickListener);
+                    panel.Children.Add(button);
 
-                    }
+                }
 
-                    border.Child = panel;
-                    popup.Child = border;
+                border.Child = panel;
+                popup.Child = border;
 
-                    // Set where the popup will show up on the screen.
-                    popup.VerticalOffset = 34;
-                    popup.Margin = new Thickness(20);
+                // Set where the popup will show up on the screen.
+                popup.VerticalOffset = 30;
+                //popup.Margin = new Thickness(20);
 
-                    // TODO I'd rather align the popup to the bottom instead of at the top
+                // TODO I'd rather align the popup to the bottom instead of at the top
 
-                    // TODO It would be nice if we could dim the webview a bit while showing the popup
+                // TODO It would be nice if we could dim the webview a bit while showing the popup
 
-                    // Open the popup.
-                    popup.IsOpen = true;
-                });
+                // Open the popup.
+                popup.IsOpen = true;
+            });
         }
 
         void buttonClickListener(object sender, RoutedEventArgs e)
@@ -147,6 +155,17 @@ namespace Cordova.Extension.Commands
             // Get the clicked button index
             Button button = (Button)sender;
             DispatchCommandResult(new PluginResult(PluginResult.Status.OK, button.TabIndex));
+        }
+
+        public void hide(string options)
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                if (popup.IsOpen)
+                {
+                    popup.IsOpen = false;
+                }
+            });
         }
     }
 }

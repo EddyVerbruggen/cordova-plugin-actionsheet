@@ -121,7 +121,8 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
     var options = {
         'title': 'What do you want with this image?',
         'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
-        'androidEnableCancelButton' : true,
+        'androidEnableCancelButton' : true, // default false
+        'winphoneEnableCancelButton' : true, // default false
         'addCancelButtonWithLabel': 'Cancel',
         'addDestructiveButtonWithLabel' : 'Delete it'
     };
@@ -141,7 +142,8 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
   function testLogoutSheet() {
     var options = {
         'buttonLabels': ['Log out'],
-        'androidEnableCancelButton' : true,
+        'androidEnableCancelButton' : true, // default false
+        'winphoneEnableCancelButton' : true, // default false
         'addCancelButtonWithLabel': 'Cancel'
     };
     window.plugins.actionsheet.show(options, callback);
