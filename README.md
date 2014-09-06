@@ -38,9 +38,9 @@ Android
 
 Windows Phone 8
 
-<img src="screenshots/wp8/wp8-share.png" width="235"/>&nbsp;
-<img src="screenshots/wp8/wp8-delete.png" width="235"/>&nbsp;
-<img src="screenshots/wp8/wp8-logout.png" width="235"/>
+<img src="screenshots/wp8/wp8-share.jpg" width="235"/>&nbsp;
+<img src="screenshots/wp8/wp8-delete.jpg" width="235"/>&nbsp;
+<img src="screenshots/wp8/wp8-logout.jpg" width="235"/>
 
 ## 3. Installation
 
