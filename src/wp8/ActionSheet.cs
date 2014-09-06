@@ -58,7 +58,7 @@ namespace Cordova.Extension.Commands
             {
                 // attach a backbutton listener to the view and dim it a bit
                 CordovaView cView = getCordovaView();
-                getCordovaView().Browser.Dispatcher.BeginInvoke(() =>
+                cView.Browser.Dispatcher.BeginInvoke(() =>
                 {
                     cView.Browser.InvokeScript("execScript", "document.addEventListener('backbutton', window.plugins.actionsheet.hide, false)");
                     cView.Browser.Opacity = 0.5d;
