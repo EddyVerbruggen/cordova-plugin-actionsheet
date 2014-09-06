@@ -5,17 +5,16 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
   cordova.exec(successCallback, errorCallback, "ActionSheet", "show", [options]);
 };
 
+ActionSheet.prototype.hide = function () {
+  cordova.exec(null, null, "ActionSheet", "hide", []);
+};
+
 ActionSheet.install = function () {
   if (!window.plugins) {
     window.plugins = {};
   }
 
   window.plugins.actionsheet = new ActionSheet();
-
-  // for wp8 we need to manually hide the popup when the backbutton is clicked
-  document.addEventListener("backbutton", function () {
-    cordova.exec(null, null, "ActionSheet", "hide", []);
-  }, false);
 
   return window.plugins.actionsheet;
 };

@@ -36,9 +36,11 @@ Android
 <img src="screenshots/android/android-delete.png" width="235"/>&nbsp;
 <img src="screenshots/android/android-logout.png" width="235"/>
 
-WP8
+Windows Phone 8
 
-Screenshots will be added soon..
+<img src="screenshots/wp8/wp8-share.png" width="235"/>&nbsp;
+<img src="screenshots/wp8/wp8-delete.png" width="235"/>&nbsp;
+<img src="screenshots/wp8/wp8-logout.png" width="235"/>
 
 ## 3. Installation
 

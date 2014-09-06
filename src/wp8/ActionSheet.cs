@@ -1,4 +1,5 @@
 ﻿﻿using Microsoft.Phone.Tasks;
+using Microsoft.Phone.Controls;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
 using WPCordovaClassLib.Cordova.JSON;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using WPCordovaClassLib;
 
 namespace Cordova.Extension.Commands
 {
@@ -54,6 +56,14 @@ namespace Cordova.Extension.Commands
 
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
+                // attach a backbutton listener to the view and dim it a bit
+                CordovaView cView = getCordovaView();
+                getCordovaView().Browser.Dispatcher.BeginInvoke(() =>
+                {
+                    cView.Browser.InvokeScript("execScript", "document.addEventListener('backbutton', window.plugins.actionsheet.hide, false)");
+                    cView.Browser.Opacity = 0.5d;
+                });
+
                 Border border = new Border();
                 border.Width = Application.Current.Host.Content.ActualWidth;
                 border.Background = darkBrush;
@@ -136,11 +146,6 @@ namespace Cordova.Extension.Commands
 
                 // Set where the popup will show up on the screen.
                 popup.VerticalOffset = 30;
-                //popup.Margin = new Thickness(20);
-
-                // TODO I'd rather align the popup to the bottom instead of at the top
-
-                // TODO It would be nice if we could dim the webview a bit while showing the popup
 
                 // Open the popup.
                 popup.IsOpen = true;
@@ -149,8 +154,8 @@ namespace Cordova.Extension.Commands
 
         void buttonClickListener(object sender, RoutedEventArgs e)
         {
-            // Close the popup.
-            popup.IsOpen = false;
+            // Close the popup
+            hide(null);
 
             // Get the clicked button index
             Button button = (Button)sender;
@@ -161,11 +166,27 @@ namespace Cordova.Extension.Commands
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
+                // remove the backbutton listener from the view and undim it
+                CordovaView cView = getCordovaView();
+                getCordovaView().Browser.Dispatcher.BeginInvoke(() =>
+                {
+                    cView.Browser.InvokeScript("execScript", "document.removeEventListener('backbutton', window.plugins.actionsheet.hide, false)");
+                    cView.Browser.Opacity = 1d;
+                });
+
                 if (popup.IsOpen)
                 {
                     popup.IsOpen = false;
                 }
             });
+        }
+
+        // note: needs to be invoked from within Deployment.Current.Dispatcher.BeginInvoke ..
+        private CordovaView getCordovaView()
+        {
+            PhoneApplicationFrame frame = (PhoneApplicationFrame)Application.Current.RootVisual;
+            PhoneApplicationPage page = (PhoneApplicationPage)frame.Content;
+            return (CordovaView)page.FindName("CordovaView");
         }
     }
 }
