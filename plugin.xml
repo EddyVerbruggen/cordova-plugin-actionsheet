@@ -10,7 +10,15 @@
     Show a sheet of options the user can choose from.
   </description>
 
+	<author>Eddy Verbruggen - @eddyverbruggen</author>
+
 	<license>MIT</license>
+
+	<keywords>ActionSheet, UIActionSheet, AlertDialog, Dialog, List, Picker, Popup</keywords>
+
+	<repo>https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git</repo>
+
+	<issue>https://github.com/EddyVerbruggen/cordova-plugin-actionsheet/issues</issue>
 
 	<engines>
 		<engine name="cordova" version=">=3.0.0"/>
