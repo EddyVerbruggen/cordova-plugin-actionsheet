@@ -121,6 +121,7 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
 
   function testShareSheet() {
     var options = {
+        'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT, // default is THEME_TRADITIONAL
         'title': 'What do you want with this image?',
         'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
         'androidEnableCancelButton' : true, // default false
@@ -155,10 +156,14 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
 ## 5. Credits
 iOS and WP8 code: [Eddy Verbruggen](https://github.com/EddyVerbruggen)
 
-Android code: [Brill Papping](https://github.com/bpappin)
+Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 
-## 6. License
+## 6. Change history
+1.1.2 You can now select a theme for your Android popup, see the first example above
+
+
+## 7. License
 
 [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)
 

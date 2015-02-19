@@ -9,6 +9,14 @@ ActionSheet.prototype.hide = function () {
   cordova.exec(null, null, "ActionSheet", "hide", []);
 };
 
+ActionSheet.prototype.ANDROID_THEMES = {
+  THEME_TRADITIONAL          : 1, // default
+  THEME_HOLO_DARK            : 2,
+  THEME_HOLO_LIGHT           : 3,
+  THEME_DEVICE_DEFAULT_DARK  : 4,
+  THEME_DEVICE_DEFAULT_LIGHT : 5
+};
+
 ActionSheet.install = function () {
   if (!window.plugins) {
     window.plugins = {};
