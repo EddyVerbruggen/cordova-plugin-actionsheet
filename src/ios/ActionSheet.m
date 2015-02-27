@@ -36,10 +36,9 @@ NSString* theCallbackId;
 
     // ActionSheet button index is 0-based, but other Cordova plugins are 1-based (prompt, confirm)
     buttonIndex++;
-    
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                  messageAsInt:buttonIndex];
-    [self writeJavascript: [pluginResult toSuccessCallbackString:theCallbackId]];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:(int)buttonIndex];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:theCallbackId];
 }
 
 @end
