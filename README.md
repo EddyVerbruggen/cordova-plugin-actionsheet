@@ -156,7 +156,7 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
   };
 ```
 
-### hide (iOS and WP8)
+### hide
 
 If for some reason you want to hide the actionsheet programmatically, do this:
 ```js

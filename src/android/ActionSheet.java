@@ -22,6 +22,8 @@ import java.util.List;
  */
 public class ActionSheet extends CordovaPlugin {
 
+  private AlertDialog dialog;
+
   public ActionSheet() {
     super();
   }
@@ -45,6 +47,12 @@ public class ActionSheet extends CordovaPlugin {
           theme,
           callbackContext);
       // need to return as this call is async.
+      return true;
+    } else if ("hide".equals(action)) {
+      if (dialog != null && dialog.isShowing()) {
+        dialog.dismiss();
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, -1));
+      }
       return true;
     }
     return false;
@@ -139,7 +147,8 @@ public class ActionSheet extends CordovaPlugin {
           }
         });
 
-        builder.create().show();
+        dialog = builder.create();
+        dialog.show();
       }
     };
     this.cordova.getActivity().runOnUiThread(runnable);
