@@ -3,6 +3,7 @@
 @implementation ActionSheet
 
 NSString* theCallbackId;
+UIActionSheet *actionSheet;
 
 - (void) show:(CDVInvokedUrlCommand*)command {
     theCallbackId = command.callbackId;
@@ -15,11 +16,11 @@ NSString* theCallbackId;
 
     [self.commandDelegate runInBackground:^{
 
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title
-                                                                 delegate:self
-                                                        cancelButtonTitle:nil
-                                                   destructiveButtonTitle:addDestructiveButtonWithLabel
-                                                        otherButtonTitles:nil];
+        actionSheet = [[UIActionSheet alloc] initWithTitle:title
+                                                  delegate:self
+                                         cancelButtonTitle:nil
+                                    destructiveButtonTitle:addDestructiveButtonWithLabel
+                                         otherButtonTitles:nil];
   
         for(int i = 0; i < [buttons count]; i++) {
             [actionSheet addButtonWithTitle:[buttons objectAtIndex:i]];
@@ -34,6 +35,15 @@ NSString* theCallbackId;
             [actionSheet showInView:self.webView.superview];
         });
     }];
+}
+
+- (void) hide:(CDVInvokedUrlCommand*)command {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // dismissing with -2 because it's +1'd by didDismissWithButtonIndex below and we want it to report -1
+        [actionSheet dismissWithClickedButtonIndex:-2 animated:true];
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:theCallbackId];
+    });
 }
 
 // delegate function of UIActionSheetDelegate

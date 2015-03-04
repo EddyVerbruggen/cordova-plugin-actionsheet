@@ -108,6 +108,9 @@ ActionSheet.js is brought in automatically. Make sure though you include a refer
 ```
 
 ## 4. Usage
+
+### show
+
 Check the [demo code](demo) to get you going quickly,
 or copy-paste some of the code below to replicate the ActionSheets of the screenshots above.
 
@@ -151,6 +154,15 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
     };
     window.plugins.actionsheet.show(options, callback);
   };
+```
+
+### hide (iOS and WP8)
+
+If for some reason you want to hide the actionsheet programmatically, do this:
+```js
+  // options and callbacks are optional, so either approach will work:
+  window.plugins.actionsheet.hide();
+  window.plugins.actionsheet.hide({}, onSuccess, onError);
 ```
 
 ## 5. Credits
