@@ -5,8 +5,8 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
   cordova.exec(successCallback, errorCallback, "ActionSheet", "show", [options]);
 };
 
-ActionSheet.prototype.hide = function () {
-  cordova.exec(null, null, "ActionSheet", "hide", []);
+ActionSheet.prototype.hide = function (options, successCallback, errorCallback) {
+  cordova.exec(successCallback, errorCallback, "ActionSheet", "hide", [options]);
 };
 
 ActionSheet.prototype.ANDROID_THEMES = {
