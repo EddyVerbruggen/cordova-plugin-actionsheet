@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="nl.x-services.plugins.actionsheet"
-    version="1.1.4">
+    id="cordova-plugin-actionsheet"
+    version="1.1.5">
 
 	<name>ActionSheet</name>
 
-	<description>
-    Show a sheet of options the user can choose from.
-  </description>
+	<description>Show a sheet of options the user can choose from.</description>
 
-	<author>Eddy Verbruggen - @eddyverbruggen</author>
+	<author>Eddy Verbruggen</author>
 
 	<license>MIT</license>
 
