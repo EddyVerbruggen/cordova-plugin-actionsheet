@@ -1,4 +1,4 @@
-﻿﻿using Microsoft.Phone.Tasks;
+﻿using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Controls;
 using WPCordovaClassLib.Cordova;
 using WPCordovaClassLib.Cordova.Commands;
