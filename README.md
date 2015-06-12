@@ -156,6 +156,8 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
   };
 ```
 
+On iOS, you can also position the actionSheet origin by adding `position: [100, 200]`
+
 ### hide
 
 If for some reason you want to hide the actionsheet programmatically, do this:
@@ -173,7 +175,7 @@ Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 ## 6. Change history
 1.1.2 You can now select a theme for your Android popup, see the first example above
-
+1.1.6 You can now set the iOS actionSheet origin position (uses the iOS `actionSheet.showFromRect` method)
 
 ## 7. License
 
