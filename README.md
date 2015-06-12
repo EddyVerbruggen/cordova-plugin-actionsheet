@@ -130,7 +130,8 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
         'androidEnableCancelButton' : true, // default false
         'winphoneEnableCancelButton' : true, // default false
         'addCancelButtonWithLabel': 'Cancel',
-        'addDestructiveButtonWithLabel' : 'Delete it'
+        'addDestructiveButtonWithLabel' : 'Delete it',
+        'position': [20, 40] // for iPad pass in the [x, y] position of the popover
     };
     // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
     // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
