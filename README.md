@@ -50,9 +50,10 @@ Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman), co
 ```
 $ phonegap local plugin add https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git
 ```
-or
+
+or with the Cordova CLI, from npm:
 ```
-$ cordova plugin add https://github.com/EddyVerbruggen/cordova-plugin-actionsheet
+$ cordova plugin add cordova-plugin-actionsheet
 $ cordova prepare
 ```
 
@@ -99,7 +100,7 @@ WP8: Copy `ActionSheet.cs` to `platforms/wp8/Plugins/nl.x-services.plugins.actio
 ### PhoneGap Build
 ActionSheet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
 ```xml
-<gap:plugin name="nl.x-services.plugins.actionsheet" />
+<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
 ```
 
 ActionSheet.js is brought in automatically. Make sure though you include a reference to cordova.js in your index.html's head:
