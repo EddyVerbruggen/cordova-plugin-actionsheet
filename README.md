@@ -45,13 +45,6 @@ Windows Phone 8
 ## 3. Installation
 
 ### Automatically (CLI / Plugman)
-Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman), compatible with [PhoneGap 3.0 CLI](http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface_add_features), here's how it works with the CLI (backup your project first!):
-
-```
-$ phonegap local plugin add https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git
-```
-
-or with the Cordova CLI, from npm:
 ```
 $ cordova plugin add cordova-plugin-actionsheet
 $ cordova prepare
@@ -176,8 +169,8 @@ Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 
 ## 6. Change history
-1.1.2 You can now select a theme for your Android popup, see the first example above
 1.1.6 You can now set the iOS actionSheet origin position (uses the iOS `actionSheet.showFromRect` method)
+1.1.2 You can now select a theme for your Android popup, see the first example above
 
 ## 7. License
 
