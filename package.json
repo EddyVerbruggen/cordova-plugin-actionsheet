@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-actionsheet",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "description": "Show a sheet of options the user can choose from.",
   "cordova": {
     "id": "cordova-plugin-actionsheet",
