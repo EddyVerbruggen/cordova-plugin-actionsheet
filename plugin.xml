@@ -2,7 +2,7 @@
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
 		id="cordova-plugin-actionsheet"
-    version="2.0.1">
+    version="2.2.0">
 
   <name>ActionSheet</name>
 
