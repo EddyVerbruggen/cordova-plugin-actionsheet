@@ -2,7 +2,7 @@
 <plugin
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
 		id="cordova-plugin-actionsheet"
-    version="2.0.1">
+    version="2.2.0">
 
   <name>ActionSheet</name>
 
@@ -22,15 +22,14 @@
     <engine name="cordova" version=">=3.0.0"/>
   </engines>
 
+  <js-module src="www/ActionSheet.js" name="ActionSheet">
+    <clobbers target="window.plugins.actionsheet"/>
+  </js-module>
+
+
 
   <!-- ios -->
-  <platform name="ios">
-
-    <js-module src="www/ActionSheet.js" name="ActionSheet">
-      <clobbers target="window.plugins.actionsheet"/>
-    </js-module>
-
-    
+  <platform name="ios"
     <config-file target="config.xml" parent="/*">
       <feature name="ActionSheet">
         <param name="ios-package" value="ActionSheet"/>
@@ -42,12 +41,6 @@
 
   <!-- android -->
   <platform name="android">
-
-    <js-module src="www/ActionSheet.js" name="ActionSheet">
-      <clobbers target="window.plugins.actionsheet"/>
-    </js-module>
-
-    
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="ActionSheet">
         <param name="android-package" value="nl.xservices.plugins.actionsheet.ActionSheet"/>
@@ -58,12 +51,6 @@
 
   <!-- wp8 -->
   <platform name="wp8">
-
-    <js-module src="www/ActionSheet.js" name="ActionSheet">
-      <clobbers target="window.plugins.actionsheet"/>
-    </js-module>
-
-    
     <config-file target="config.xml" parent="/*">
       <feature name="ActionSheet">
         <param name="wp-package" value="ActionSheet"/>
@@ -76,7 +63,6 @@
   
   <platform name="windows">
     <js-module src="src/windows/ActionSheetProxy.js" name="ActionSheetProxy">
-      <clobbers target="window.plugins.actionsheet" />
       <merges target="" />
     </js-module>
   </platform>
