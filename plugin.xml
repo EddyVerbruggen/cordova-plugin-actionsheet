@@ -29,7 +29,7 @@
 
 
   <!-- ios -->
-  <platform name="ios"
+  <platform name="ios">
     <config-file target="config.xml" parent="/*">
       <feature name="ActionSheet">
         <param name="ios-package" value="ActionSheet"/>
