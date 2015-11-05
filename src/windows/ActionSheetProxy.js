@@ -1,4 +1,9 @@
-﻿
+﻿/*
+@date  : 11.05.2015
+@author: Pavel Durov
+@note  :  In order to use ActionSheetProxy on Universal Windows Platform -
+		  Make sure that you are referencing base.js and ui.js 
+ */
 function ActionSheet() { /* CTOR...*/ }
 
 
