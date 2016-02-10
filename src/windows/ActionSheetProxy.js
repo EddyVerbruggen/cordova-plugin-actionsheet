@@ -12,6 +12,10 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
     ActionSheet.prototype.successCallBack = successCallback;
     ActionSheet.prototype.errorCallback = errorCallback;
 
+    if (cordova.platformId == "windows") {
+        ActionSheet.prototype._injectWinJsFlyoutHTML();
+    }
+
     if (options) {
         var actionSheetProxyFlyoutDiv = document.getElementById("actionSheetProxyFlyoutDiv");
         //Settings popup
@@ -41,7 +45,7 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
                 //var bodys = document.getElementsByClassName('bodyClass')[0];
                 var anchor = document.getElementById("actionSheetSetPoint");
                 if (anchor) {
-                    fly.winControl.show(anchor, "top");
+                    fly.winControl.show(anchor, "bottom");
                 }
 
 
@@ -81,10 +85,6 @@ ActionSheet.prototype.ANDROID_THEMES = {
 ActionSheet.prototype.install = function () {
     if (!window.plugins) {
         window.plugins = {};
-    }
-    if (cordova.platformId == "windows") {
-        //this._injectWinJsFlyoutHTML();
-        ActionSheet.prototype._injectWinJsFlyoutHTML();
     }
     window.plugins.actionsheet = new ActionSheet();
 
@@ -126,13 +126,14 @@ ActionSheet.prototype._addbuttons = function (lables, destinationCtrl) {
     if (lables && destinationCtrl) {
         for (var i = 0; i < lables.length; i++) {
             var btn = this._generateButton(lables[i], this._getButtonStyle());
-            btn.onclick = function () {
-                if (ActionSheet.prototype.successCallBack) {
-                    ActionSheet.prototype.successCallBack(btn.tabIndex);
-                    ActionSheet.prototype.hide();
-                }
-                
-            }
+	    (function (i) {
+            	btn.onclick = function () {
+                    if (ActionSheet.prototype.successCallBack) {
+                    	ActionSheet.prototype.successCallBack(i + 1);
+                    	ActionSheet.prototype.hide();
+                    }                
+            	}
+            })(i);
             destinationCtrl.appendChild(btn);
         }
     }
