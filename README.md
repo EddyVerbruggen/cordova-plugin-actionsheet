@@ -169,6 +169,7 @@ Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 
 ## 6. Change history
+2.2.1 Encoding of diacritical characters fixed on iOS, so you can now use `Español` as a title or button label.
 1.1.6 You can now set the iOS actionSheet origin position (uses the iOS `actionSheet.showFromRect` method)
 1.1.2 You can now select a theme for your Android popup, see the first example above
 
