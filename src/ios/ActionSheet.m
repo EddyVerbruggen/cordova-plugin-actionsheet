@@ -64,8 +64,7 @@ UIActionSheet *actionSheet;
   if (input == nil) {
     return nil;
   } else {
-    return [NSString stringWithCString:[input cStringUsingEncoding:NSISOLatin1StringEncoding]
-                              encoding:NSUTF8StringEncoding];
+    return input;
   }
 }
 
