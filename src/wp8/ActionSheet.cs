@@ -60,7 +60,7 @@ namespace Cordova.Extension.Commands
                 CordovaView cView = getCordovaView();
                 cView.Browser.Dispatcher.BeginInvoke(() =>
                 {
-                    cView.Browser.InvokeScript("execScript", "document.addEventListener('backbutton', window.plugins.actionsheet.hide, false)");
+                    cView.Browser.InvokeScript("exec", "document.addEventListener('backbutton', window.plugins.actionsheet.hide, false)");
                     cView.Browser.Opacity = 0.5d;
                 });
 
@@ -170,7 +170,7 @@ namespace Cordova.Extension.Commands
                 CordovaView cView = getCordovaView();
                 getCordovaView().Browser.Dispatcher.BeginInvoke(() =>
                 {
-                    cView.Browser.InvokeScript("execScript", "document.removeEventListener('backbutton', window.plugins.actionsheet.hide, false)");
+                    cView.Browser.InvokeScript("exec", "document.removeEventListener('backbutton', window.plugins.actionsheet.hide, false)");
                     cView.Browser.Opacity = 1d;
                 });
 
