@@ -16,10 +16,10 @@ by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 
 Show a sheet of options the user can choose from.
 
-* Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman).
-* iOS uses the native `UIActionSheet`.
-* Android uses the native `AlertDialog`.
-* WP8 uses the native `Popup`.
+* Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman)
+* iOS uses the native `UIActionSheet`
+* Android uses the native `AlertDialog`
+* WP8 uses the native `Popup`
 
 ## 2. Screenshots
 
