@@ -25,12 +25,16 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
             this._addTitle(options.title, actionSheetProxyFlyoutDiv);
         }
 
-        if (options.addDestructiveButtonWithLabel) {    //Generate Desctructive Button
+        if (!options.destructiveButtonLast && options.addDestructiveButtonWithLabel) {    //Generate Desctructive Button
             this._addDestructiveButton(options.addDestructiveButtonWithLabel, actionSheetProxyFlyoutDiv);
         }
 
         if (options.buttonLabels && options.buttonLabels instanceof Array) {    //Appending Buttons to main Flyout Div
             this._addbuttons(options.buttonLabels, actionSheetProxyFlyoutDiv);
+        }
+
+        if (options.destructiveButtonLast && options.addDestructiveButtonWithLabel) {    //Generate Desctructive Button
+            this._addDestructiveButton(options.addDestructiveButtonWithLabel, actionSheetProxyFlyoutDiv);
         }
 
         if (options.winphoneEnableCancelButton && options.addCancelButtonWithLabel) {
