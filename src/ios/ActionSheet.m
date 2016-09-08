@@ -35,7 +35,7 @@
                                                                for(int i = 0; i < [buttons count]; i++) {
                                                                  if ([action.title isEqualToString:buttons[i]]) {
                                                                    buttonIndex = i+1;
-                                                                   if (!destructiveButtonLast) {
+                                                                   if (addDestructiveButtonWithLabel != nil && !destructiveButtonLast) {
                                                                      buttonIndex++;
                                                                    }
                                                                    [self respondWithButtonIndex:buttonIndex];
