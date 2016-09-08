@@ -34,13 +34,15 @@
 
   function testShareSheet() {
     var options = {
-      'androidTheme' : window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT,
-      'title': 'What do you want with this image?',
-      'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
-      'addCancelButtonWithLabel': 'Cancel',
-      'androidEnableCancelButton' : true,
-      'winphoneEnableCancelButton' : true,
-      'addDestructiveButtonWithLabel' : 'Delete it'
+      androidTheme : window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT, // material
+      title: 'What do you want with this image?',
+      subtitle: 'Choose wisely, my friend', // supported on iOS only
+      buttonLabels: ['Share via Facebook', 'Share via Twitter'],
+      addCancelButtonWithLabel: 'Cancel',
+      androidEnableCancelButton : true,
+      winphoneEnableCancelButton : true,
+      addDestructiveButtonWithLabel : 'Delete it',
+      destructiveButtonLast: true // you can choose where the destructive button is shown
     };
     window.plugins.actionsheet.show(options, callback);
   }

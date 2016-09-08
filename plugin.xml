@@ -3,6 +3,8 @@
     xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="nl.x-services.plugins.actionsheet"
     version="2.2.2">
+		id="cordova-plugin-actionsheet"
+    version="2.3.0">
 
   <name>ActionSheet</name>
 
