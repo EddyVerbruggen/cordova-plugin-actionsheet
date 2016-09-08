@@ -33,6 +33,9 @@ namespace Cordova.Extension.Commands
 
             [DataMember(IsRequired = false, Name = "winphoneEnableCancelButton")]
             public bool winphoneEnableCancelButton { get; set; }
+
+            [DataMember(IsRequired = false, Name = "destructiveButtonLast")]
+            public bool destructiveButtonLast { get; set; }
         }
 
         private ActionSheetOptions actionSheetOptions = null;
@@ -91,8 +94,8 @@ namespace Cordova.Extension.Commands
 
                 int buttonIndex = 1;
 
-                // desctructive button
-                if (actionSheetOptions.addDestructiveButtonWithLabel != null)
+                // destructive button
+                if (!actionSheetOptions.destructiveButtonLast && actionSheetOptions.addDestructiveButtonWithLabel != null)
                 {
                     Button button = new Button();
                     button.TabIndex = buttonIndex++;
@@ -121,6 +124,20 @@ namespace Cordova.Extension.Commands
                         button.Click += new RoutedEventHandler(buttonClickListener);
                         panel.Children.Add(button);
                     }
+                }
+
+                // destructive button
+                if (actionSheetOptions.destructiveButtonLast && actionSheetOptions.addDestructiveButtonWithLabel != null)
+                {
+                    Button button = new Button();
+                    button.TabIndex = buttonIndex++;
+                    button.Content = actionSheetOptions.addDestructiveButtonWithLabel;
+                    button.Background = darkBrush; // new SolidColorBrush(Colors.White);
+                    button.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 69, 0));
+                    button.Padding = new Thickness(10);
+                    button.Margin = new Thickness(5);
+                    button.Click += new RoutedEventHandler(buttonClickListener);
+                    panel.Children.Add(button);
                 }
 
                 // cancel button

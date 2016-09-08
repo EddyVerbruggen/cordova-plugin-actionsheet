@@ -6,8 +6,6 @@ by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
 1. [Description](#1-description)
 2. [Screenshots](#2-screenshots)
 3. [Installation](#3-installation)
-	3. [Automatically (CLI / Plugman)](#automatically-cli--plugman)
-	3. [Manually](#manually)
 4. [Usage](#4-usage)
 5. [Credits](#5-credits)
 6. [License](#6-license)
@@ -52,48 +50,10 @@ $ cordova prepare
 
 ActionSheet.js is brought in automatically. There is no need to change or add anything in your html.
 
-### Manually
-
-1\. Add the following xml to your `config.xml` files:
-
-iOS
-```xml
-<feature name="ActionSheet">
-  <param name="ios-package" value="ActionSheet" />
-</feature>
-```
-
-Android
-```xml
-<feature name="ActionSheet">
-  <param name="android-package" value="nl.xservices.plugins.actionsheet.ActionSheet"/>
-</feature>
-```
-
-WP8
-```xml
-<feature name="ActionSheet">
-  <param name="wp-package" value="ActionSheet"/>
-</feature>
-```
-
-2\. Grab a copy of ActionSheet.js, add it to your project and reference it in `index.html`:
-```html
-<script type="text/javascript" src="js/ActionSheet.js"></script>
-```
-
-3\. Download the source files and copy them to your project.
-
-iOS: Copy the `.h` and `.m` files to `platforms/ios/<ProjectName>/Plugins`
-
-Android: Copy `ActionSheet.java` to `platforms/android/src/nl/xservices/plugins/actionsheet/` (create the folders)
-
-WP8: Copy `ActionSheet.cs` to `platforms/wp8/Plugins/nl.x-services.plugins.actionsheet` (create the folders)
-
 ### PhoneGap Build
 ActionSheet  works with PhoneGap build too! Just add the following xml to your `config.xml` to always use the latest version of this plugin:
 ```xml
-<gap:plugin name="cordova-plugin-actionsheet" source="npm" />
+<plugin name="cordova-plugin-actionsheet" />
 ```
 
 ActionSheet.js is brought in automatically. Make sure though you include a reference to cordova.js in your index.html's head:
@@ -108,6 +68,8 @@ ActionSheet.js is brought in automatically. Make sure though you include a refer
 Check the [demo code](demo) to get you going quickly,
 or copy-paste some of the code below to replicate the ActionSheets of the screenshots above.
 
+Also, wait for `deviceready` to fire before using plugins in general!
+
 ```js
   var callback = function(buttonIndex) {
     setTimeout(function() {
@@ -118,14 +80,16 @@ or copy-paste some of the code below to replicate the ActionSheets of the screen
 
   function testShareSheet() {
     var options = {
-        'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT, // default is THEME_TRADITIONAL
-        'title': 'What do you want with this image?',
-        'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
-        'androidEnableCancelButton' : true, // default false
-        'winphoneEnableCancelButton' : true, // default false
-        'addCancelButtonWithLabel': 'Cancel',
-        'addDestructiveButtonWithLabel' : 'Delete it',
-        'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+        androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT, // default is THEME_TRADITIONAL
+        title: 'What do you want with this image?',
+        subtitle: 'Choose wisely, my friend', // supported on iOS only
+        buttonLabels: ['Share via Facebook', 'Share via Twitter'],
+        androidEnableCancelButton : true, // default false
+        winphoneEnableCancelButton : true, // default false
+        addCancelButtonWithLabel: 'Cancel',
+        addDestructiveButtonWithLabel : 'Delete it',
+        position: [20, 40], // for iPad pass in the [x, y] position of the popover
+        destructiveButtonLast: true // you can choose where the destructive button is shown
     };
     // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
     // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
@@ -169,6 +133,7 @@ Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 
 ## 6. Change history
+* 2.3.0 Added `subtitle` (iOS) and `destructiveButtonLast` preferences. Also, iOS now uses the newer `UIAlertController` instead of `UIActionSheet`.
 * 2.2.2 OK, 2.2.1 has issues with Russian and the like, so reverted. Just add `<meta charset="utf-8" />` to your html file.
 * 2.2.1 Encoding of diacritical characters fixed on iOS, so you can now use `Español` as a title or button label.
 * 1.1.6 You can now set the iOS actionSheet origin position (uses the iOS `actionSheet.showFromRect` method)
