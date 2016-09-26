@@ -108,10 +108,10 @@ ActionSheet.prototype._addbuttons = function (labels, destination) {
 ActionSheet.prototype._onclick = function (ev) {
     ev.preventDefault();
     ev.stopPropagation();
+    ActionSheet.prototype.hide();
     if (ActionSheet.prototype.successCallBack) {
         ActionSheet.prototype.successCallBack(parseInt(ev.target.value, 10));
     }
-    ActionSheet.prototype.hide();
 };
 
 ActionSheet.prototype._clearChildren = function (element) {
