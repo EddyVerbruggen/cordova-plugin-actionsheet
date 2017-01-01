@@ -133,6 +133,7 @@ Android code: mostly [Brill Papping](https://github.com/bpappin)
 
 
 ## 6. Change history
+* 2.3.2 Default iPad popup is now in the center (was in the top left corner)
 * 2.3.1 Added `subtitle` (iOS) and `destructiveButtonLast` preferences. Also, iOS now uses the newer `UIAlertController` instead of `UIActionSheet`.
 * 2.2.2 OK, 2.2.1 has issues with Russian and the like, so reverted. Just add `<meta charset="utf-8" />` to your html file.
 * 2.2.1 Encoding of diacritical characters fixed on iOS, so you can now use `Español` as a title or button label.
