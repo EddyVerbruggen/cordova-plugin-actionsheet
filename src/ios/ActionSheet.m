@@ -67,9 +67,13 @@
               UIPopoverPresentationController *popPresenter = [self.alertController popoverPresentationController];
               popPresenter.sourceView = self.webView.superview;
               if (position == nil) {
-                NSLog(@"Because the 'postion' param is not set, on iPad the popup is shown in the top left corner.");
+                NSLog(@"Because the 'postion' param is not set, on iPad the popup is shown in the center.");
+                [popPresenter setPermittedArrowDirections:0];
+                popPresenter.sourceView = self.webView.superview;
+                popPresenter.sourceRect = CGRectMake(CGRectGetMidX(self.webView.bounds), CGRectGetMidY(self.webView.bounds), 0, 0);
+              } else {
+                popPresenter.sourceRect = [self getPopupRectFromIPadPopupCoordinates:position];
               }
-              popPresenter.sourceRect = [self getPopupRectFromIPadPopupCoordinates:(position != nil ? position : @[@40, @20])];
             }
             [self.viewController presentViewController:self.alertController animated:YES completion:nil];
         });
