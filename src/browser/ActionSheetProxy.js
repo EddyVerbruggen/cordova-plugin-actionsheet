@@ -43,9 +43,11 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
         }
 
         if (options.addCancelButtonWithLabel) {
-            this._addCancelButton(options.addCancelButtonWithLabel, actionSheetContainer, options.buttonLabels.length + 1);
+            if (options.addDestructiveButtonWithLabel)
+                this._addCancelButton(options.addCancelButtonWithLabel, actionSheetContainer, options.buttonLabels.length + 2);
+            else
+                this._addCancelButton(options.addCancelButtonWithLabel, actionSheetContainer, options.buttonLabels.length + 1);
         }
-
     }
 };
 
