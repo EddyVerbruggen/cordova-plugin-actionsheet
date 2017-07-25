@@ -34,7 +34,7 @@
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction *handledAction) {
                                                              int buttonIndex;
-                                                             for (NSUInteger j = 0; j < [buttons count]; j++) {
+                                                             for (int j = 0; j < [buttons count]; j++) {
                                                                if ([handledAction.title isEqualToString:buttons[j]]) {
                                                                  buttonIndex = j + 1;
                                                                  if (addDestructiveButtonWithLabel != nil && !destructiveButtonLast) {
