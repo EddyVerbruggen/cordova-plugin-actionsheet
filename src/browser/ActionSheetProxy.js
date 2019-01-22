@@ -9,7 +9,7 @@ ActionSheet.prototype.show = function (options, successCallback, errorCallback) 
 
     var actionSheetContainer = document.getElementById('actionSheetProxyContainer');
     if (!actionSheetContainer) {
-        var body = document.getElementsByTagName('body')[0];
+        var body = document.getElementById('allBody');
         actionSheetContainer = document.createElement('div');
         actionSheetContainer.setAttribute('class', 'action-sheet-container');
         actionSheetContainer.setAttribute('id', 'actionSheetProxyContainer');
